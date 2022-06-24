@@ -50,7 +50,7 @@ create_timeline_grob <- function(data, panel_scales, coord) {
       r=data_trans[["radius"]][i],
       gp=gpar(
         col="black",
-        fill="blue",
+        fill=data[["fill"]][i],
         alpha=0.5
       )
     )
@@ -75,7 +75,8 @@ draw_panel <- function(data, panel_scales, coord) {
 
 ### test
 ca_data %>%
-  ggplot(mapping=aes(x=Year, r=Mag)) +
-  geom_timeline()
+  ggplot(mapping=aes(x=Year, r=Mag, fill=Deaths)) +
+  geom_timeline() +
+  scale_fill_continuous()
 
 
