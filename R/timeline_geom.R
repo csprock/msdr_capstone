@@ -1,44 +1,20 @@
 
-
-
-
-create_timeline_grob <- function(data, panel_scales, coord) {
-
-
-  #data_trans <- data.frame(
-  #  x = data[["x"]],
-  #  y = data[["y"]]
-  #) %>% coord$transform(panel_scales)
-
-  data_trans <- coord$transform(data, panel_scales)
-
-  #y_pos <- data_trans[["y"]][1]
-  #base_horizontal_line <- linesGrob(x=c(0, 1), y=c(y_pos, y_pos))
-
-  circles <- circleGrob(
-    x=data_trans$x,
-    y=data_trans$y,
-    r=map_to_interval(data_trans$size, x_min=0, x_max=10, u=0.05, l=0),
-    gp=gpar(
-      col="black",
-      fill=data_trans$fill,
-      alpha=0.5
-    )
-  )
-
-  return(gTree(children=gList(circles)))
-
-  return(grobs)
-}
-
-
  draw_panel <- function(data, panel_scales, coord) {
-   if (isFALSE("y" %in% colnames(data))) {
-     data$y <- 0.5
-   }
 
-   timeline_grob <- create_timeline_grob(data, panel_scales, coord)
-   return(timeline_grob)
+   data_trans <- coord$transform(data, panel_scales)
+
+   circles <- circleGrob(
+     x=data_trans$x,
+     y=data_trans$y,
+     r=map_to_interval(data_trans$size, x_min=0, x_max=10, u=0.05, l=0),
+     gp=gpar(
+       col="black",
+       fill=data_trans$fill,
+       alpha=0.5
+     )
+   )
+
+   return(gTree(children=gList(circles)))
 }
 
 
