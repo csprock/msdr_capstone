@@ -12,8 +12,8 @@ create_timeline_grob <- function(data, panel_scales, coord) {
 
   data_trans <- coord$transform(data, panel_scales)
 
-  y_pos <- data_trans[["y"]][1]
-  base_horizontal_line <- linesGrob(x=c(0, 1), y=c(y_pos, y_pos))
+  #y_pos <- data_trans[["y"]][1]
+  #base_horizontal_line <- linesGrob(x=c(0, 1), y=c(y_pos, y_pos))
 
   circles <- circleGrob(
     x=data_trans$x,
@@ -26,7 +26,7 @@ create_timeline_grob <- function(data, panel_scales, coord) {
     )
   )
 
-  return(gTree(children=gList(circles, base_horizontal_line)))
+  return(gTree(children=gList(circles)))
 
   return(grobs)
 }
@@ -44,7 +44,7 @@ create_timeline_grob <- function(data, panel_scales, coord) {
 
 
 GeomTimeline <- ggproto("GeomTimeline", GeomPoint,
-                        required_aes = c("x", "size", "fill"),
+                        required_aes = c("x","y", "size", "fill"),
                         default_aes = aes(color="grey", alpha=0.75),
                         draw_key = draw_key_point,
                         draw_panel = draw_panel)
@@ -72,8 +72,8 @@ geom_timeline <- function(
 
 
 ### test
-ca_data %>%
-  ggplot(mapping=aes(x=Year, size=Mag, fill=Deaths)) +
+ca_data_subset %>%
+  ggplot(mapping=aes(x=Year, size=Mag, y=y, fill=Deaths)) +
   geom_timeline() +
   scale_fill_continuous() +
   labs(fill="#deaths", size="Magnitude") +
