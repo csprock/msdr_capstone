@@ -1,6 +1,11 @@
 
 draw_panel_timeline <- function(data, panel_scales, coord) {
 
+  # filter to the top 5 for each country
+  data <- data %>%
+    dplyr::group_by(y) %>%
+    dplyr::top_n(x, n=data$n_max[1])
+
   data_trans <- coord$transform(data, panel_scales)
 
   data_trans$y0 <- data_trans$y + 0.05
@@ -30,6 +35,7 @@ draw_panel_timeline <- function(data, panel_scales, coord) {
 
 GeomLabelTimeline <- ggproto("GeomLabelTimeline", Geom,
                         required_aes = c("x","y", "label"),
+                        default_aes = c(n_max=5),
                         draw_key = draw_key_point,
                         draw_panel = draw_panel_timeline)
 
