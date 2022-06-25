@@ -8,16 +8,14 @@
      y=data_trans$y,
      r=map_to_interval(data_trans$size, x_min=0, x_max=10, u=0.05, l=0),
      gp=gpar(
-       col="black",
+       col=data_trans$color,
        fill=data_trans$fill,
-       alpha=0.5
+       alpha=data_trans$alpha
      )
    )
 
    return(gTree(children=gList(circles)))
 }
-
-
 
 GeomTimeline <- ggproto("GeomTimeline", GeomPoint,
                         required_aes = c("x","y", "size", "fill"),
@@ -45,14 +43,3 @@ geom_timeline <- function(
     params=list(na.rm=na.rm, ...)
   )
 }
-
-
-### test
-ca_data_subset %>%
-  ggplot(mapping=aes(x=Year, size=Mag, y=y, fill=Deaths)) +
-  geom_timeline() +
-  scale_fill_continuous() +
-  labs(fill="#deaths", size="Magnitude") +
-  scale_size_continuous(range=c(0,10))
-
-
