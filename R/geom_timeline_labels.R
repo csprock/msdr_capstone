@@ -21,7 +21,6 @@ draw_panel_timeline <- function(data, panel_scales, coord) {
     gp=gpar(fontsize=10)
   )
 
-  print(data_trans$y0)
   segments <- segmentsGrob(
     x0=data_trans$x,
     x1=data_trans$x,
