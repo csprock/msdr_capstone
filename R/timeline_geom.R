@@ -15,11 +15,10 @@ create_timeline_grob <- function(data, panel_scales, coord) {
   y_pos <- data_trans[["y"]][1]
   base_horizontal_line <- linesGrob(x=c(0, 1), y=c(y_pos, y_pos))
 
-
   circles <- circleGrob(
     x=data_trans$x,
     y=data_trans$y,
-    r=data_trans$size,
+    r=map_to_interval(data_trans$size, x_min=0, x_max=10, u=0.05, l=0),
     gp=gpar(
       col="black",
       fill=data_trans$fill,
@@ -27,21 +26,22 @@ create_timeline_grob <- function(data, panel_scales, coord) {
     )
   )
 
-
   return(gTree(children=gList(circles, base_horizontal_line)))
 
   return(grobs)
 }
 
 
-draw_panel <- function(data, panel_scales, coord) {
-  if (isFALSE("y" %in% colnames(data))) {
-    data$y <- 0.5
-  }
+ draw_panel <- function(data, panel_scales, coord) {
+   if (isFALSE("y" %in% colnames(data))) {
+     data$y <- 0.5
+   }
 
-  timeline_grob <- create_timeline_grob(data, panel_scales, coord)
-  return(timeline_grob)
+   timeline_grob <- create_timeline_grob(data, panel_scales, coord)
+   return(timeline_grob)
 }
+
+
 
 GeomTimeline <- ggproto("GeomTimeline", GeomPoint,
                         required_aes = c("x", "size", "fill"),
@@ -77,6 +77,6 @@ ca_data %>%
   geom_timeline() +
   scale_fill_continuous() +
   labs(fill="#deaths", size="Magnitude") +
-  scale_radius(range=c(0, 0.1))
+  scale_size_continuous(range=c(0,10))
 
 
