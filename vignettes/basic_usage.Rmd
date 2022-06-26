@@ -1,0 +1,73 @@
+---
+title: "Basic Usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic Usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#library(MSDRCapstone)
+library(readr)
+```
+
+
+# Loading Data
+
+```{r load_data, echo=FALSE, message=FALSE, warning=FALSE}
+data <- readr::read_delim("../data-raw/earthquakes.tsv", delim="\t")
+data_cleaned <- eq_clean_data(data)
+```
+
+# Viewing Timeline
+
+```{r timeline_basic}
+p <- data_cleaned %>%
+  filter(`Country Name` %in% c("Mexico", "Argentina") & 1950 <= year(date) & year(date) <= 2022) %>%
+  ggplot(mapping=aes(x=date, y=`Country Name`, size=Mag, fill=Deaths)) + 
+  geom_timeline(alpha=0.5) + 
+  scale_radius(range=c(0,10)) +
+  scale_y_discrete(breaks=)
+  labs(x="Year") + ggtitle("Timeline of Earthquakes in Mexico and Argentina") + 
+  geom_label_timeline(label=`Location Name`, n_max=4)
+p
+```
+
+# Adding Labels
+
+```{r labels}
+p + geom_label_timeline(aes(label=`Location Name`), n_max=5)
+
+```
+
+# Maps
+
+```{r basic_map}
+data_cleaned %>%
+  filter(`Country Name` == "Mexico" & lubridate::year(date) >= 1900) %>%
+  eq_map(annot_col="date")
+
+```
+
+
+```{r}
+data_cleaned %>%
+  filter(`Country Name` == "Mexico" & lubridate::year(date) >= 1900) %>%
+  mutate(popup_text = eq_create_label(.)) %>%
+  eq_map(annot_col="popup_text")
+
+
+```
+
+
+
+
+
