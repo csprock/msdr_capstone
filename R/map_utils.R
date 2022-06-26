@@ -1,5 +1,3 @@
-# create html label function
-
 html_label <- function(location, mag, deaths) {
 
   deaths <- as.character(if_else(is.na(deaths), 0, deaths))
@@ -17,4 +15,10 @@ html_label <- function(location, mag, deaths) {
 
 }
 
+
+eq_create_label <- function(df) {
+  df %>% rowwise() %>%
+    mutate(temp = html_label(`Location Name`, Mag, Deaths)) %>%
+    pull(temp)
+}
 
