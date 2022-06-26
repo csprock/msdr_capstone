@@ -46,6 +46,10 @@ convert_lat_lon <- function(data) {
     mutate(
       Latitude=as.numeric(Latitude),
       Longitude=as.numeric(Longitude)
+    ) %>%
+    rename(
+      lat=Latitude,
+      lng=Longitude
     )
 }
 
