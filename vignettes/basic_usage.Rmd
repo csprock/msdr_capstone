@@ -35,9 +35,7 @@ p <- data_cleaned %>%
   ggplot(mapping=aes(x=date, y=`Country Name`, size=Mag, fill=Deaths)) + 
   geom_timeline(alpha=0.5) + 
   scale_radius(range=c(0,10)) +
-  scale_y_discrete(breaks=)
-  labs(x="Year") + ggtitle("Timeline of Earthquakes in Mexico and Argentina") + 
-  geom_label_timeline(label=`Location Name`, n_max=4)
+  labs(x="Year") + ggtitle("Timeline of Earthquakes in Mexico and Argentina") 
 p
 ```
 
