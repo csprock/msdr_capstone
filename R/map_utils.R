@@ -16,3 +16,29 @@ eq_create_label <- function(df) {
     pull(temp)
 }
 
+
+eq_map <- function(df, annot_col=NULL) {
+
+  df <- df %>%
+    mutate(Mag = 2500*Mag)
+
+  if (is.null(annot_col)) {
+    m <- df %>%
+      leaflet() %>%
+      addTiles() %>%
+      addCircles(radius=~Mag)
+  } else {
+
+    f <- as.formula(gsub("PATTERN", annot_col, "~`PATTERN`"))
+
+    df <- df %>%
+      mutate_at(vars(annot_col), as.character)
+
+    m <- df %>%
+      leaflet() %>%
+      addTiles() %>%
+      addCircles(radius=~Mag, popup=f)
+  }
+
+  return(m)
+}
