@@ -23,7 +23,11 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
                         draw_key = ggplot2::draw_key_point,
                         draw_panel = draw_panel)
 
-
+#' A timeline geom
+#'
+#' Add a timeline to the earthquake data
+#'
+#' @export
 geom_timeline <- function(
   mapping=NULL,
   data=NULL,

@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 ^kitematic$
 ^data-raw$
+scratch.R
+^doc$
+^Meta$

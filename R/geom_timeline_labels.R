@@ -39,6 +39,11 @@ GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
                         draw_panel = draw_panel_timeline)
 
 
+#' Add labels to timeline
+#'
+#' Add labels to a timeline geom with option to limit to top n largest earthquakes
+#'
+#' @export
 geom_label_timeline <- function(
   mapping=NULL,
   data=NULL,

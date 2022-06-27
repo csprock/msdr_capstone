@@ -10,13 +10,14 @@ html_label <- function(location, mag, deaths) {
 }
 
 
+#' @export
 eq_create_label <- function(df) {
   df %>% dplyr::rowwise() %>%
     dplyr::mutate(temp = html_label(`Location Name`, Mag, Deaths)) %>%
     dplyr::pull(temp)
 }
 
-
+#' @export
 eq_map <- function(df, annot_col=NULL) {
 
   df <- df %>%
