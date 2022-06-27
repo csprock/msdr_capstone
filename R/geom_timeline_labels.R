@@ -11,17 +11,17 @@ draw_panel_timeline <- function(data, panel_scales, coord) {
   data_trans$y0 <- data_trans$y + 0.05
 
 
-  text_labels <- textGrob(
+  text_labels <- grid::textGrob(
     label = data_trans$label,
     x=data_trans$x,
     y=data_trans$y0,
     just="left",
     rot=45,
     check.overlap = TRUE,
-    gp=gpar(fontsize=10)
+    gp=grid::gpar(fontsize=10)
   )
 
-  segments <- segmentsGrob(
+  segments <- grid::segmentsGrob(
     x0=data_trans$x,
     x1=data_trans$x,
     y0=data_trans$y0,
@@ -29,13 +29,13 @@ draw_panel_timeline <- function(data, panel_scales, coord) {
     default.units="npc"
   )
 
-  return(gTree(children=gList(segments, text_labels)))
+  return(grid::gTree(children=grid::gList(segments, text_labels)))
 }
 
-GeomLabelTimeline <- ggproto("GeomLabelTimeline", Geom,
+GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
                         required_aes = c("x","y", "label"),
                         default_aes = c(n_max=5),
-                        draw_key = draw_key_point,
+                        draw_key = ggplot2::draw_key_point,
                         draw_panel = draw_panel_timeline)
 
 
@@ -47,7 +47,7 @@ geom_label_timeline <- function(
   na.rm=TRUE,
   show.legend=NA,
   inherit.aes=TRUE, ...) {
-  layer(
+  ggplot2::layer(
     geom=GeomLabelTimeline,
     mapping=mapping,
     data=data,
