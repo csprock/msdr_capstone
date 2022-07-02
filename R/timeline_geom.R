@@ -35,7 +35,8 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
                           )
 
                           return(grid::gTree(children=grid::gList(circles)))
-                        )
+                        }
+                  )
 
 #' Create an earthquake timeline
 #'
@@ -52,7 +53,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
 #' @param mapping A set of aesthetic mappings created by \code{aes()}
 #' @param data The data to be displayed in this layer
 #'
-#' @section Aesthetics
+#' @section Aesthetics:
 #'
 #' The \code{geom_timeline()} understands the following aesthetics
 #' \itemize{
