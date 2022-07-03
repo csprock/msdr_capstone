@@ -1,6 +1,6 @@
 #' Linear transformation of an interveral
 #'
-#' Map points in the interval [x_max, x_min] to the interval [l, u].
+#' Map points in the interval \[x_max, x_min\] to the interval \[l, u\].
 #'
 #' @param x a numeric, point to be scaled
 #' @param x_max upper bound of the domain
@@ -8,8 +8,7 @@
 #' @param u upper bound of the range
 #' @param l lower bound of the range
 #'
-#' @examples
-#' scaled_x <- map_to_interval(2, 10, 5, 1, 0)
+#' @return numeric scaled between upper and lower interval bounds
 map_to_interval <- function(x, x_max, x_min, u=1, l=0) {
 
   m <- (u-l)/(x_max-x_min)
