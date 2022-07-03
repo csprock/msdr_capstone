@@ -3,9 +3,9 @@
 #'
 #' Convert year, month and day columns into a single datetime column.
 #'
-#' @param data dataframe containing raw NOAA earthquake data
-#'
 #' @seealso [eq_clean_data()]
+#'
+#' @param data dataframe containing raw NOAA earthquake data
 #'
 #' @return a dataframe with a "date" column added and "Year", "Mo" and "Dy" columns removed.
 #'
@@ -25,12 +25,23 @@ parse_date <- function(data) {
 }
 
 
-#' Clean location names
+#' Parse location names
 #'
-#' @seealso [eq_clean_data()], [eq_location_clean ()]
+#' Parse and clean country and location names
 #'
-#' @return a string
+#' This family of functions parses the "Location Name" column of the NOAA earthquake dataset
+#' and separates the location from the country, creating two columns containing each. These functions
+#' also trim whitespace and convert the names to title case.
+#'
+#' @param str string containing the raw value from the "Location Name" column
+#'
+#' @seealso [eq_location_clean()]
+#'
 #' @importFrom magrittr %>%
+#' @name clean_location_name
+NULL
+
+#' @rdname clean_location_name
 clean_location <- function(str) {
   stringr::str_split_fixed(str, ":", n=2) %>%
     .[, 2] %>%
@@ -38,12 +49,7 @@ clean_location <- function(str) {
     stringr::str_to_title()
 }
 
-#' Clean country names
-#'
-#' @seealso [eq_clean_data()], [eq_location_clean ()]
-#'
-#' @return a string
-#' @importFrom magrittr %>%
+#' @rdname clean_location_name
 country_name <- function(str) {
   stringr::str_split_fixed(str, ":", n=2) %>%
     .[, 1] %>%
@@ -61,9 +67,9 @@ country_name <- function(str) {
 #'
 #' @param data dataframe containing raw NOAA earthquake data
 #'
-#' @seealso [country_name()], [clean_location()], [eq_clean_data()]
+#' @seealso [eq_clean_data()], [country_name()], [clean_location()]
 #'
-#' @return dataframe with an additional "Country Name" column
+#' @return dataframe with an additional "Country Name" column.
 #' @importFrom magrittr %>%
 eq_location_clean <- function(data) {
   data %>%
@@ -78,7 +84,7 @@ eq_location_clean <- function(data) {
 
 #' Convert coordinates to numerics
 #'
-#' Convert latitude and longitudes to numerics and rename them for compatibility with leaflet.
+#' Convert latitude and longitudes to numerics and renames them for compatibility with leaflet.
 #'
 #' @seealso [eq_clean_data()]
 #'
@@ -104,7 +110,7 @@ convert_lat_lon <- function(data) {
 #' for further use with this library's plotting functions. This function performs the following:
 #' \itemize{
 #' \item consolidates the month, day and year columns into a single datetime column
-#' \item separates the country and location into two separate columns
+#' \item separates the country and location into two separate columns, trims whitespace and converts them to titlecase
 #' \item converts latitude and longitude into numerics and renames these columns for compatibility with Leaflet
 #' }
 #'
