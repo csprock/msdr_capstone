@@ -1,22 +1,19 @@
 #' Base class for geom_label_timeline
 #'
-#' @param required_aes the required asethetics for this geom are
-#' \enumerate{
-#'  \item label a character containing the text of the label
-#' }
-#' @param default_aes default asthetics for this geom are
-#' \enumerate{
-#'  \item n_max integer setting the maximum number of labels to display.
-#'  If set, will only display the labels of the top n_max earthquakes by magnitude
-#' }
+#' Provides the baseclass for the [geom_label_timeline()] geom. This function is not
+#' meant to be called directly by the user and is not exported. Please see [geom_label_timeline()].
 #'
-#' @seealso [geom_timeline()]
+#' @usage NULL
+#' @family Timeline Geom
+#' @seealso [ggplot2::Geom()]
 GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
                         required_aes = c("label"),
                         default_aes = c(n_max=5),
                         draw_key = ggplot2::draw_key_point,
                         draw_panel = function(data, panel_scales, coord) {
-                          # filter to the top 5 for each country
+
+                          # filter to the top 5 earthquakes by magnitude
+                          # uses size aesthetic inherited from geom_timeline to sort
                           data <- data %>%
                             dplyr::group_by(y) %>%
                             dplyr::top_n(wt=size, n=data$n_max[1])
@@ -63,11 +60,12 @@ GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
 #'
 #' The following aesthetics are supported. Position aesthetics are inherited from [geom_timeline()].
 #'
-#' \itemize{
-#'   \item label character with the text of the label
-#'   \item n_max optional integer specifying the top number of earthquakes to display
+#' \describe{
+#'   \item{label}{character with the text of the label}
+#'   \item{n_max}{optional integer specifying the top number of earthquakes to display. The \code{size} aesthetic inherited from [geom_timeline()] is used to sort the earthquakes.}
 #' }
 #'
+#' @family Timeline Geom
 #' @seealso [geom_timeline()]
 #'
 #' @examples
