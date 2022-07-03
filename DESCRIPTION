@@ -20,9 +20,10 @@ Suggests:
     readr
 VignetteBuilder: knitr
 Imports: 
-    ggplot2,
     dplyr,
-    leaflet,
     stringr,
     lubridate,
     grid
+Depends:
+    ggplot2,
+    leaflet
