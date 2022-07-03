@@ -9,32 +9,68 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
+  messages=FALSE,
   comment = "#>"
 )
 ```
 
+# Introduction
+
+This vignette shows how to use the `MSDRCapstone` package, which is a package for formatting and visualizing data from the [NOAA earthquake database](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/search). This package fulfills the requirements of the "Mastering Software Development in R" Coursera class.
+
+The package has three categories of functionality. The first category are helper functions for cleaning the NOAA data for use with the two other categories, which are for plotting a timeline using `ggplot2` and mapping the earthquake locations using `leaflet`. 
+
 ```{r setup}
 library(MSDRCapstone)
-library(readr)
-library(ggplot2)
 library(dplyr)
+library(ggplot2)
 library(lubridate)
 ```
 
 
-# Loading Data
 
-```{r load_data, echo=FALSE, message=FALSE, warning=FALSE}
-data <- readr::read_delim("../data-raw/earthquakes.tsv", delim="\t")
-data_cleaned <- eq_clean_data(data)
+# 1. Loading and Cleaning the NOAA Data
+
+This section demonstrates how to use the `eq_clean_data()` function to clean the raw NOAA data for use with the plotting functions. A small subset of the raw, unformatted NOAA data that contains the data for California and Mexico has been included in this package. 
+
+```{r load-data}
+data("raw_noaa_sample", package="MSDRCapstone")
+head(raw_noaa_sample)
 ```
 
-# Viewing Timeline
+There are several aspects of this messy data that we would like to clean up before plotting. The first issue is that the date of the earthquake is split across three separate columns, \emph{Mo}, \emph{Dy} and \emph{Year}. Another issue is that the location name column includes both the name of the country and the location of the earthquake within that country. We would like to separate these into separate columns for easy selection and filtering in addition to making the names more readable. 
+
+The `leaflet` package allows the user to pass a dataframe directly to its plotting functions. To make use of this functionality later, we need to make sure the \emph{Latitude} and \emph{Longitude} columns are both numerics and their names conform to what is expected by `leaflet`. 
+
+All these tasks are accomplished using the `eq_clean_data()` function:
+
+```{r clean-data}
+data_clean <- eq_clean_data(raw_noaa_sample)
+head(data_clean)
+```
+Specifically, the new columns are:
+```{r clean-data-subset}
+data_clean %>%
+  select(date, `Country Name`, `Location Name`, lat, lng)
+```
+
+
+# Creating a Timeline with `ggplot2`
+
+Now that we have our cleaned up dataset, we can now plot a timeline using `ggplot2` and the `geom_timeline()` function from this package. In order to avoid crowding the timeline, it is recommended that the data be filtered based on the year before being passed on to the geom.
+
+The `geom_timeline` accepts four aesthetics. 
+
+* The \emph{date} column should be mappped to `y` aesthetic since this controls the position of the earthquake markers along the timeline. 
+* The \emph{Country Name} column should be mapped to the `y` aesthetic. A separate timeline will be drawn for each country. 
+* The \emph{Mag} column should be mapped to the `size` aesthetic. This controls the radius of the circles. It is meant to be used in conjunction with the `scale_radius` function, which controls the size range of the circles.
+* The \emph{Deaths} column should be mapped to the `fill` aesthetic, which will color the circles on a continuous scale with death toll of the earthquake. 
+
 
 ```{r timeline_basic}
-p <- data_cleaned %>%
-  filter(`Country Name` %in% c("Mexico", "Argentina") & 1950 <= year(date) & year(date) <= 2022) %>%
+p <- data_clean %>%
+  filter(`Country Name` %in% c("Mexico", "California") & 1950 <= year(date) & year(date) <= 2022) %>%
   ggplot(mapping=aes(x=date, y=`Country Name`, size=Mag, fill=Deaths)) + 
   geom_timeline(alpha=0.5) + 
   scale_radius(range=c(0,10)) +
@@ -42,25 +78,29 @@ p <- data_cleaned %>%
 p
 ```
 
-# Adding Labels
+## Adding Labels
+We may also wish to add labels to the timeline. In order to prevent the timeline from getting crowded with labels, an optional `n_max` parameter which will limit the number of labels to only the top largest earthquakes by magnitude (the `size` aesthetic is inherited from the plot and used for choosing which labels to display). The `label` aesthetic controls the label. In the example below, the \emph{Location Name} column is used for the label. 
 
 ```{r labels}
 p + geom_label_timeline(aes(label=`Location Name`), n_max=5)
-
 ```
+
 
 # Maps
 
+The `eq_map` function will plot the locations of all the earthquakes in the dataframe passed to it so long as it contains \emph{lat} and \emph{lng} columns. The size of the markers is proportional to the magnitude of the earthquake. An optional `annot_col` accepts a character specifying a column to use to annotate the points. 
+
 ```{r basic_map}
-data_cleaned %>%
+data_clean %>%
   filter(`Country Name` == "Mexico" & lubridate::year(date) >= 1900) %>%
   eq_map(annot_col="date")
 
 ```
 
+This package also comes with a function `eq_create_label` that is to be used in conjunction with dplyr's `mutate` to create an HTML label containing the location name, magnitude and date of the earthquake. The following example shows how to use it. 
 
 ```{r}
-data_cleaned %>%
+data_clean %>%
   filter(`Country Name` == "Mexico" & lubridate::year(date) >= 1900) %>%
   mutate(popup_text = eq_create_label(.)) %>%
   eq_map(annot_col="popup_text")

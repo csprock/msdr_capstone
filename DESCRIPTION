@@ -26,4 +26,5 @@ Imports:
     grid
 Depends:
     ggplot2,
-    leaflet
+    leaflet,
+    R (>= 2.10)
