@@ -1,20 +1,12 @@
 
 #' Base class for geom_timeline
 #'
-#' @param required_aes the required asethetics for this geom are
-#' \enumerate{
-#'  \item x numeric representing the year of the earthquake
-#'  \item y factor representing the region. A new timeline will be plotted for each level of the factor
-#'  \item size a numeric controlling the size of the circle marks along the timeline
-#'  \item fill a numeric controlling the fill of the circle marks
-#' }
-#' @param default_aes default asthetics for this geom are
-#' \enumerate{
-#'  \item color, default color of the border of the circles
-#'  \item alpha, numeric between 0 and 1 which controls the transparency of circles
-#' }
+#' Provides the baseclass for the [geom_timeline()] geom. This function is not
+#' meant to be called directly by the user and is not exported. Please see [geom_timeline()].
 #'
-#' @seealso [geom_timeline()]
+#' @usage NULL
+#' @family Timeline Geom
+#' @seealso [ggplot2::Geom()]
 GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
                         required_aes = c("x","y", "size", "fill"),
                         default_aes = ggplot2::aes(color="grey", alpha=0.75),
@@ -56,15 +48,16 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
 #' @section Aesthetics:
 #'
 #' The \code{geom_timeline()} understands the following aesthetics
-#' \itemize{
-#'  \item x numeric representing the year of the earthquake
-#'  \item y factor representing the region. A new timeline will be plotted for each level of the factor
-#'  \item size a numeric controlling the size of the circle marks along the timeline
-#'  \item fill a numeric controlling the fill of the circle marks
-#'  \item alpha optional numeric between 0 and 1 controlling the transparency of the circles
-#'  \item color optional character specifying the color of the circle borders
+#' \describe{
+#'  \item{x}{numeric representing the year of the earthquake}
+#'  \item{y}{factor representing the region. A new timeline will be plotted for each level of the factor}
+#'  \item{size}{a numeric controlling the size of the circle marks along the timeline}
+#'  \item{fill}{a numeric controlling the fill of the circle marks}
+#'  \item{alpha}{optional numeric between 0 and 1 controlling the transparency of the circles}
+#'  \item{color}{optional character specifying the color of the circle borders}
 #' }
 #'
+#' @family Geom Timeline
 #' @seealso [eq_clean_data()], [geom_label_timeline()]
 #'
 #' @examples

@@ -4,7 +4,7 @@
 #' meant to be called directly by the user and is not exported. Please see [geom_label_timeline()].
 #'
 #' @usage NULL
-#' @family Timeline Geom
+#' @family Timeline Geom Label
 #' @seealso [ggplot2::Geom()]
 GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
                         required_aes = c("label"),
@@ -65,7 +65,7 @@ GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
 #'   \item{n_max}{optional integer specifying the top number of earthquakes to display. The \code{size} aesthetic inherited from [geom_timeline()] is used to sort the earthquakes.}
 #' }
 #'
-#' @family Timeline Geom
+#' @family Timeline Geom Label
 #' @seealso [geom_timeline()]
 #'
 #' @examples
