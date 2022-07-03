@@ -5,7 +5,7 @@
 #'
 #' Given a location, magnitude and number of deaths, this function returns a formatted
 #' HTML string for use with Leaflet. If any of the values are NA, that value will not
-#' be included.
+#' be included in the label.
 #'
 #' @param location string containing the name of earthquake location
 #' @param mag numeric with the earthquake magnitude
@@ -13,8 +13,7 @@
 #'
 #' @return string containing the HTML label
 #'
-#' @examples
-#' html_label("San Francisco", 6.7, 3)
+#' @family Mapping
 html_label <- function(location, mag, deaths) {
 
   row_templates <- c(
@@ -31,9 +30,9 @@ html_label <- function(location, mag, deaths) {
 #'
 #' Creates a new column from a dataframe containing NOAA earthquake data
 #'
-#' The function expects that the following named columns are present.
+#' The function expects that the following named columns are present:
 #' \itemize{
-#'  \item `Location Name`
+#'  \item Location Name
 #'  \item Mag
 #'  \item Deaths
 #' }
@@ -42,9 +41,9 @@ html_label <- function(location, mag, deaths) {
 #'
 #' @param df dataframe containing NOAA earthquake data
 #'
-#' @return a character vector
+#' @return a character vector containing the labels
 #'
-#' @seealso \code{\link{html_labels}}
+#' @family Mapping
 #'
 #' @examples
 #' \dontrun{
@@ -67,6 +66,8 @@ eq_create_label <- function(df) {
 #' @param annot_col optional, a column label to use for annotating the earthquake markers
 #'
 #' @return a leaflet map object
+#'
+#' @family Mapping
 #'
 #' @examples
 #' \dontrun{
