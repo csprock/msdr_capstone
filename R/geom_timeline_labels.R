@@ -65,6 +65,9 @@ GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
 #'   \item{n_max}{optional integer specifying the top number of earthquakes to display. The \code{size} aesthetic inherited from [geom_timeline()] is used to sort the earthquakes.}
 #' }
 #'
+#'
+#' @inheritParams ggplot2::geom_point
+#'
 #' @family Timeline Geom Label
 #' @seealso [geom_timeline()]
 #'

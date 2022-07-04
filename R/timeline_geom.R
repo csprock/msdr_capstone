@@ -2,7 +2,7 @@
 #' Base class for geom_timeline
 #'
 #' Provides the baseclass for the [geom_timeline()] geom. This function is not
-#' meant to be called directly by the user and is not exported. Please see [geom_timeline()].
+#' meant to be called directly by the user and is not exported. Please see [geom_timeline()]
 #'
 #' @family Timeline Geom
 #' @import ggplot2
@@ -57,6 +57,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", GeomPoint,
 #'  \item{color}{optional character specifying the color of the circle borders}
 #' }
 #'
+#' @inheritParams ggplot2::geom_point
 #' @family Geom Timeline
 #' @seealso [eq_clean_data()], [geom_label_timeline()]
 #'

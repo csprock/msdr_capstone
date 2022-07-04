@@ -12,7 +12,7 @@ GeomTimeline
 }
 \description{
 Provides the baseclass for the \code{\link[=geom_timeline]{geom_timeline()}} geom. This function is not
-meant to be called directly by the user and is not exported. Please see \code{\link[=geom_timeline]{geom_timeline()}}.
+meant to be called directly by the user and is not exported. Please see \code{\link[=geom_timeline]{geom_timeline()}}
 }
 \seealso{
 \code{\link[ggplot2:Geom]{ggplot2::Geom()}}
