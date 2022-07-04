@@ -47,7 +47,6 @@ data <- eq_clean(raw_data)
   geom_label_timeline(aes(label=label), x_max=5)
 }
 
-
 }
 \seealso{
 \code{\link[=geom_timeline]{geom_timeline()}}

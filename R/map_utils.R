@@ -54,8 +54,8 @@ html_label <- function(location, mag, deaths) {
 #' @export
 eq_create_label <- function(df) {
   df %>% dplyr::rowwise() %>%
-    dplyr::mutate(temp = html_label(`Location Name`, Mag, Deaths)) %>%
-    dplyr::pull(temp)
+    dplyr::mutate(temp = html_label(.data[["Location Name"]], .data[["Mag"]], .data[["Deaths"]])) %>%
+    dplyr::pull("temp")
 }
 
 #' Create a map of earthquake locations
@@ -76,11 +76,13 @@ eq_create_label <- function(df) {
 #'    eq_map(annot_col="label")
 #'   m
 #' }
+#' @importFrom stats as.formula
+#' @import leaflet
 #' @export
 eq_map <- function(df, annot_col=NULL) {
 
   df <- df %>%
-    dplyr::mutate(Mag = 2500*Mag)  # scale up magnitude for better viewing on the map
+    dplyr::mutate(Mag= 2500*.data[["Mag"]])  # scale up magnitude for better viewing on the map
 
   if (is.null(annot_col)) {
     m <- df %>%

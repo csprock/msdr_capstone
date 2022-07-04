@@ -7,6 +7,9 @@
 \format{
 An object of class \code{GeomTimeline} (inherits from \code{GeomPoint}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 }
+\usage{
+GeomTimeline
+}
 \description{
 Provides the baseclass for the \code{\link[=geom_timeline]{geom_timeline()}} geom. This function is not
 meant to be called directly by the user and is not exported. Please see \code{\link[=geom_timeline]{geom_timeline()}}.

@@ -13,12 +13,12 @@
 parse_date <- function(data) {
   data %>%
     dplyr::mutate(
-      Mo = dplyr::na_if(Mo, 1),
-      Dy = dplyr::na_if(Dy, 1),
+      Mo = dplyr::na_if(.data[["Mo"]], 1),
+      Dy = dplyr::na_if(.data[["Dy"]], 1),
       date = lubridate::make_date(
-        year=Year,
-        month=Mo,
-        day=Dy
+        year=.data[["Year"]],
+        month=.data[["Mo"]],
+        day=.data[["Dy"]]
       )
     ) %>%
     dplyr::select(-c("Year", "Mo", "Dy"))
@@ -43,16 +43,14 @@ NULL
 
 #' @rdname clean_location_name
 clean_location <- function(str) {
-  stringr::str_split_fixed(str, ":", n=2) %>%
-    .[, 2] %>%
+  stringr::str_split_fixed(str, ":", n=2)[2] %>%
     stringr::str_trim() %>%
     stringr::str_to_title()
 }
 
 #' @rdname clean_location_name
 country_name <- function(str) {
-  stringr::str_split_fixed(str, ":", n=2) %>%
-    .[, 1] %>%
+  stringr::str_split_fixed(str, ":", n=2)[1] %>%
     stringr::str_trim() %>%
     stringr::str_to_title()
 }
@@ -74,10 +72,10 @@ country_name <- function(str) {
 eq_location_clean <- function(data) {
   data %>%
     dplyr::mutate(
-      `Country Name` = country_name(`Location Name`),
-      `Country Name` = dplyr::if_else(`Country Name` == "", NA_character_, `Country Name`),
-      `Location Name` = clean_location(`Location Name`),
-      `Location Name` = dplyr::if_else(`Location Name` == "", NA_character_, `Location Name`),
+      `Country Name` = country_name(.data[["Location Name"]]),
+      `Country Name` = dplyr::if_else(.data[["Country Name"]] == "", NA_character_, .data[["Country Name"]]),
+      `Location Name` = clean_location(.data[["Location Name"]]),
+      `Location Name` = dplyr::if_else(.data[["Location Name"]] == "", NA_character_, .data[["Location Name"]]),
     )
 }
 
@@ -86,18 +84,20 @@ eq_location_clean <- function(data) {
 #'
 #' Convert latitude and longitudes to numerics and renames them for compatibility with leaflet.
 #'
+#' @param df dataframe containing raw NOAA data
 #' @seealso [eq_clean_data()]
 #'
 #' @importFrom magrittr %>%
-convert_lat_lon <- function(data) {
-  data %>%
+#' @importFrom rlang .data
+convert_lat_lon <- function(df) {
+  df %>%
     dplyr::mutate(
-      Latitude=as.numeric(Latitude),
-      Longitude=as.numeric(Longitude)
+      Latitude=as.numeric(.data[["Latitude"]]),
+      Longitude=as.numeric(.data[["Longitude"]])
     ) %>%
     dplyr::rename(
-      lat=Latitude,
-      lng=Longitude
+      lat=.data[["Latitude"]],
+      lng=.data[["Longitude"]]
     )
 }
 
@@ -114,7 +114,7 @@ convert_lat_lon <- function(data) {
 #' \item converts latitude and longitude into numerics and renames these columns for compatibility with Leaflet
 #' }
 #'
-#' @param data a dataframe or tibble containing raw NOAA data
+#' @param df a dataframe or tibble containing raw NOAA data
 #'
 #' @return a cleaned dataframe
 #'
@@ -125,8 +125,8 @@ convert_lat_lon <- function(data) {
 #'
 #' @importFrom magrittr %>%
 #' @export
-eq_clean_data <- function(data) {
-  data %>%
+eq_clean_data <- function(df) {
+  df %>%
     parse_date() %>%
     eq_location_clean() %>%
     convert_lat_lon()

@@ -4,10 +4,10 @@
 \alias{eq_clean_data}
 \title{Clean NOAA Earthquake Data}
 \usage{
-eq_clean_data(data)
+eq_clean_data(df)
 }
 \arguments{
-\item{data}{a dataframe or tibble containing raw NOAA data}
+\item{df}{a dataframe or tibble containing raw NOAA data}
 }
 \value{
 a cleaned dataframe

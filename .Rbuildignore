@@ -5,3 +5,5 @@
 scratch.R
 ^doc$
 ^Meta$
+^LICENSE\.md$
+^\.rstudio$

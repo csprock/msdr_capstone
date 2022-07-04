@@ -4,13 +4,13 @@
 #' Provides the baseclass for the [geom_timeline()] geom. This function is not
 #' meant to be called directly by the user and is not exported. Please see [geom_timeline()].
 #'
-#' @usage NULL
 #' @family Timeline Geom
+#' @import ggplot2
 #' @seealso [ggplot2::Geom()]
-GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
+GeomTimeline <- ggplot2::ggproto("GeomTimeline", GeomPoint,
                         required_aes = c("x","y", "size", "fill"),
-                        default_aes = ggplot2::aes(color="grey", alpha=0.75),
-                        draw_key = ggplot2::draw_key_point,
+                        default_aes = aes(color="grey", alpha=0.75),
+                        draw_key = draw_key_point,
                         draw_panel = function(data, panel_scales, coord) {
 
                           data_trans <- coord$transform(data, panel_scales)
@@ -68,6 +68,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::GeomPoint,
 #'   geom_timeline(alpha=0.5)
 #' }
 #'
+#' @import ggplot2
 #' @export
 geom_timeline <- function(
   mapping=NULL,
@@ -77,7 +78,7 @@ geom_timeline <- function(
   na.rm=TRUE,
   show.legend=NA,
   inherit.aes=TRUE, ...) {
-  ggplot2::layer(
+  layer(
     geom=GeomTimeline,
     mapping=mapping,
     data=data,

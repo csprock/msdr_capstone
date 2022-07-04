@@ -4,7 +4,10 @@
 \alias{convert_lat_lon}
 \title{Convert coordinates to numerics}
 \usage{
-convert_lat_lon(data)
+convert_lat_lon(df)
+}
+\arguments{
+\item{df}{dataframe containing raw NOAA data}
 }
 \description{
 Convert latitude and longitudes to numerics and renames them for compatibility with leaflet.

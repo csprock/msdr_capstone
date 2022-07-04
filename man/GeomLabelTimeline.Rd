@@ -7,6 +7,9 @@
 \format{
 An object of class \code{GeomLabelTimeline} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
 }
+\usage{
+GeomLabelTimeline
+}
 \description{
 Provides the baseclass for the \code{\link[=geom_label_timeline]{geom_label_timeline()}} geom. This function is not
 meant to be called directly by the user and is not exported. Please see \code{\link[=geom_label_timeline]{geom_label_timeline()}}.

@@ -3,8 +3,8 @@
 #' Provides the baseclass for the [geom_label_timeline()] geom. This function is not
 #' meant to be called directly by the user and is not exported. Please see [geom_label_timeline()].
 #'
-#' @usage NULL
 #' @family Timeline Geom Label
+#' @import ggplot2
 #' @seealso [ggplot2::Geom()]
 GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
                         required_aes = c("label"),
@@ -77,7 +77,7 @@ GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
 #'   geom_label_timeline(aes(label=label), x_max=5)
 #' }
 #'
-#'
+#' @import ggplot2
 #' @export
 geom_label_timeline <- function(
   mapping=NULL,
