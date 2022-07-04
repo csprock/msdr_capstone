@@ -78,7 +78,6 @@ The \code{geom_timeline()} understands the following aesthetics
   ggplot(aes(x=Year, y=Country, size=Magnitude, fill=Deaths)) +
   geom_timeline(alpha=0.5)
 }
-
 }
 \seealso{
 \code{\link[=eq_clean_data]{eq_clean_data()}}, \code{\link[=geom_label_timeline]{geom_label_timeline()}}

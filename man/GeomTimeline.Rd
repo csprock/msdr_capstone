@@ -15,7 +15,7 @@ Provides the baseclass for the \code{\link[=geom_timeline]{geom_timeline()}} geo
 meant to be called directly by the user and is not exported. Please see \code{\link[=geom_timeline]{geom_timeline()}}
 }
 \seealso{
-\code{\link[ggplot2:Geom]{ggplot2::Geom()}}
+\code{\link[ggplot2:ggplot2-ggproto]{ggplot2::Geom()}}
 }
 \concept{Timeline Geom}
 \keyword{datasets}

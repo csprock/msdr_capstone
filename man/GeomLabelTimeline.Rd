@@ -15,7 +15,7 @@ Provides the baseclass for the \code{\link[=geom_label_timeline]{geom_label_time
 meant to be called directly by the user and is not exported. Please see \code{\link[=geom_label_timeline]{geom_label_timeline()}}.
 }
 \seealso{
-\code{\link[ggplot2:Geom]{ggplot2::Geom()}}
+\code{\link[ggplot2:ggplot2-ggproto]{ggplot2::Geom()}}
 
 Other Timeline Geom Label: 
 \code{\link{geom_label_timeline}()}

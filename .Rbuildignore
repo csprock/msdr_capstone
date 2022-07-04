@@ -7,3 +7,7 @@ scratch.R
 ^Meta$
 ^LICENSE\.md$
 ^\.rstudio$
+^\.git$
+^\.gitignore$
+^\.config$
+^vignettes/\.gitignore$

@@ -5,6 +5,7 @@
 #'
 #' @family Timeline Geom Label
 #' @import ggplot2
+#' @import grid
 #' @seealso [ggplot2::Geom()]
 GeomLabelTimeline <- ggplot2::ggproto("GeomLabelTimeline", ggplot2::Geom,
                         required_aes = c("label"),

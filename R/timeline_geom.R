@@ -68,7 +68,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", GeomPoint,
 #'   ggplot(aes(x=Year, y=Country, size=Magnitude, fill=Deaths)) +
 #'   geom_timeline(alpha=0.5)
 #' }
-#'
+#' @import grid
 #' @import ggplot2
 #' @export
 geom_timeline <- function(
