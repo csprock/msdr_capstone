@@ -17,7 +17,8 @@ RoxygenNote: 7.2.0
 Suggests: 
     knitr,
     rmarkdown,
-    readr
+    readr,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
     dplyr,
@@ -30,3 +31,4 @@ Depends:
     ggplot2,
     leaflet,
     R (>= 2.10)
+Config/testthat/edition: 3
