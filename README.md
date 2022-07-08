@@ -2,7 +2,7 @@
 # MSDRCapstone
 
 <!-- badges: start -->
-![R-CMD-check](https://github.com/csprock/msdr_capstone/actions/workflows/check-release/badge.svg)
+[![check-release](https://github.com/csprock/msdr_capstone/actions/workflows/check-release.yaml/badge.svg)](https://github.com/csprock/msdr_capstone/actions/workflows/check-release.yaml)
 <!-- badges: end -->
 
 Completes the requirements for the "Mastering Software Development in R" Capstone project for Coursera with the following exceptions:
