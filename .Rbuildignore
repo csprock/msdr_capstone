@@ -11,3 +11,4 @@ scratch.R
 ^\.gitignore$
 ^\.config$
 ^vignettes/\.gitignore$
+^\.github$
