@@ -43,14 +43,16 @@ NULL
 
 #' @rdname clean_location_name
 clean_location <- function(str) {
-  stringr::str_split_fixed(str, ":", n=2)[2] %>%
+  tmp <- stringr::str_split_fixed(str, ":", n=2)[, 2] %>%
+    stringr::str_split_fixed(",", n=2)
+  tmp[,1] %>%
     stringr::str_trim() %>%
     stringr::str_to_title()
 }
 
 #' @rdname clean_location_name
 country_name <- function(str) {
-  stringr::str_split_fixed(str, ":", n=2)[1] %>%
+  stringr::str_split_fixed(str, ":", n=2)[, 1] %>%
     stringr::str_trim() %>%
     stringr::str_to_title()
 }
@@ -73,9 +75,11 @@ eq_location_clean <- function(data) {
   data %>%
     dplyr::mutate(
       `Country Name` = country_name(.data[["Location Name"]]),
+      `Location Name` = clean_location(.data[["Location Name"]])
+    ) %>%
+    dplyr::mutate(
       `Country Name` = dplyr::if_else(.data[["Country Name"]] == "", NA_character_, .data[["Country Name"]]),
-      `Location Name` = clean_location(.data[["Location Name"]]),
-      `Location Name` = dplyr::if_else(.data[["Location Name"]] == "", NA_character_, .data[["Location Name"]]),
+      `Location Name` = dplyr::if_else(.data[["Location Name"]] == "", NA_character_, .data[["Location Name"]])
     )
 }
 
