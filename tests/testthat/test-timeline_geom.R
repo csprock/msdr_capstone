@@ -1,7 +1,7 @@
 
 test_that("Test that geom_timeline works", {
 
-  data("raw_noaa_sample", package="MSDRCapstone", envir=environment())
+  data("test_data_1", package="MSDRCapstone", envir=environment())
   on.exit(rm(test_data_1, envir=environment()), add=TRUE)
 
   p <- raw_noaa_sample %>%
