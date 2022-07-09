@@ -12,3 +12,5 @@ scratch.R
 ^\.config$
 ^vignettes/\.gitignore$
 ^\.github$
+^doc/map_picture\.png$
+^doc/timeline_picture\.png$

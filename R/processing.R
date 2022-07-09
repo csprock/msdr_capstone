@@ -43,7 +43,9 @@ NULL
 
 #' @rdname clean_location_name
 clean_location <- function(str) {
-  stringr::str_split_fixed(str, ":", n=2)[, 2] %>%
+  tmp <- stringr::str_split_fixed(str, ":", n=2)[, 2] %>%
+    stringr::str_split_fixed(",", n=2)
+  tmp[,1] %>%
     stringr::str_trim() %>%
     stringr::str_to_title()
 }

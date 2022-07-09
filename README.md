@@ -18,3 +18,12 @@ You can install the development version of MSDRCapstone from [GitHub](https://gi
 # install.packages("devtools")
 devtools::install_github("csprock/msdr_capstone")
 ```
+
+## Sample Output
+
+#### Timeline Geom
+![Timeline Geom](doc/timeline_picture.png)
+
+
+#### Leaflet Map
+![Map](doc/map_picture.png)
