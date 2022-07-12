@@ -5,7 +5,11 @@
 [![check-release](https://github.com/csprock/msdr_capstone/actions/workflows/check-release.yaml/badge.svg)](https://github.com/csprock/msdr_capstone/actions/workflows/check-release.yaml)
 <!-- badges: end -->
 
-Completes the requirements for the "Mastering Software Development in R" Capstone project for Coursera with the following exceptions:
+Completes the requirements for the "Mastering Software Development in R" Capstone project for Coursera. 
+
+## Notes for Graders
+
+I have made the following modifications to the assignment:
 
 * Github Actions is used instead of TravisCI because Travis no longer supports open source projects for free
 * only exported functions have examples

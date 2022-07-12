@@ -1,3 +1,6 @@
+# geom_timeline
+#
+# Contains functions for creating the timeline geom
 
 #' Base class for geom_timeline
 #'

@@ -1,3 +1,6 @@
+# map_utils.R
+#
+# Contains utility functions for generating the leaflet map.
 
 #' Create HTML labels
 #'

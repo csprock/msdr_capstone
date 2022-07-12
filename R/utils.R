@@ -1,4 +1,8 @@
-#' Linear transformation of an interveral
+# utils.R
+#
+# misc utility functions
+
+#' Linear scaling of an interval
 #'
 #' Map points in the interval \[x_max, x_min\] to the interval \[l, u\].
 #'

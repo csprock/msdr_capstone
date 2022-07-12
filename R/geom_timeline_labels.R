@@ -1,3 +1,7 @@
+# geom_timeline_labels.R
+#
+# Contains functions for adding a labels geom to the timeline
+
 #' Base class for geom_label_timeline
 #'
 #' Provides the baseclass for the [geom_label_timeline()] geom. This function is not

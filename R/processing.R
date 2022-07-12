@@ -1,3 +1,6 @@
+# processing.R
+#
+# contains functions for processing the raw NOAA data
 
 #' Format NOAA dates
 #'
